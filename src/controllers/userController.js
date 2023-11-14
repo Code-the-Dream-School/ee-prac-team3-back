@@ -60,9 +60,18 @@ const logIn = async (req, res) => {
       httpOnly: true,
     };
     res.cookie("token", token, cookiesOptions);
+
     return res.status(200).json({
       success: true,
       message: "User Successfuly Sign",
+      userId: req.user.userId,
+      email: req.user.email,
+      firstname: req.user.firstname,
+      lastname: req.user.lastname,
+      username: req.user.username,
+      role: req.user.role,
+      accessToken: token,
+      isActive: req.user.isActive,
     });
   } catch (error) {
     return res.status(400).json({

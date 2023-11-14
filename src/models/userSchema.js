@@ -12,6 +12,12 @@ const userSchema = new Schema({
   },
   lastname: {
     type: String,
+    required: [true, "lastname must be required"],
+    minLength: [3, "lastname must be at least 3 char"],
+    maxLength: [15, "lastname must be less than 15 char"],
+  },
+  username: {
+    type: String,
     required: [true, "username must be required"],
     minLength: [3, "username must be at least 3 char"],
     maxLength: [15, "username must be less than 15 char"],
@@ -25,6 +31,15 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: [true, "password must be required"],
+  },
+  role: {
+    type: String,
+    enum: ["admin", "user"],
+    default: "user",
+  },
+  isActive: {
+    type: Boolean,
+    default: true,
   },
 });
 {
@@ -41,10 +56,13 @@ userSchema.methods = {
   jwtToken() {
     return JWT.sign(
       {
-        id: this._id,
+        userId: this._id,
         firstname: this.firstname,
         lastname: this.lastname,
+        username: this.username,
         email: this.email,
+        role: this.role,
+        isActive: this.isActive,
       },
       process.env.SECRET,
       { expiresIn: "24h" }
