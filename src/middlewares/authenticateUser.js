@@ -11,8 +11,18 @@ const authenticateUser = (req, res, next) => {
   }
   try {
     const payload = JWT.verify(token, process.env.SECRET);
+    // req.user = {
+    //   userId: payload.id,
+    //   email: payload.email,
+    //   firstname: payload.firstname,
+    //   lastname: payload.lastname,
+    //   username: payload.username,
+    //   role: payload.role,
+    //   isActive: payload.isActive,
+    //   accessToken: token,
+    // };
 
-    req.user = {
+    res.status(200).json({
       userId: payload.id,
       email: payload.email,
       firstname: payload.firstname,
@@ -21,7 +31,7 @@ const authenticateUser = (req, res, next) => {
       role: payload.role,
       isActive: payload.isActive,
       accessToken: token,
-    };
+    });
     next();
   } catch (error) {
     return res.status(400).json({
