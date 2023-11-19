@@ -1,7 +1,13 @@
-const express = require('express');
+const express = require("express");
+const { signUp, logIn, logOut } = require("../controllers/userController");
+const signupDataValidate = require("../middlewares/signupDataValidate");
+const loginDataValidate = require("../middlewares/loginDataValidate");
+const authenticateUser = require("../middlewares/authenticateUser");
 const router = express.Router();
-const mainController = require('../controllers/mainController.js');
 
-router.get('/', mainController.get);
-  
+//user
+router.post("/signup", signupDataValidate, signUp);
+router.route("/login").post(loginDataValidate, logIn).get(authenticateUser);
+router.get("/logout", logOut);
+
 module.exports = router;
