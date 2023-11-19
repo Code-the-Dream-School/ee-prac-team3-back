@@ -60,7 +60,7 @@ userSchema.methods = {
   jwtToken() {
     return JWT.sign(
       {
-        userId: this._id,
+        id: this._id,
         firstname: this.firstname,
         lastname: this.lastname,
         username: this.username,
