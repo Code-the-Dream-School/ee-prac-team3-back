@@ -21,8 +21,8 @@ router.get("/logout", logOut);
 
 router.post("/addnote", authenticateUser, addNote);
 router.get("/getnote", authenticateUser, getNotes);
-router.put("/updatenote/:noteid", authenticateUser, updateNote);
-router.delete("/deletenote/:noteid", authenticateUser, deleteNote);
+router.put("/updatenote", authenticateUser, updateNote);
+router.delete("/deletenote", authenticateUser, deleteNote);
 router.delete("/deleteallnote", authenticateUser, deleteAllNote);
 
 module.exports = router;

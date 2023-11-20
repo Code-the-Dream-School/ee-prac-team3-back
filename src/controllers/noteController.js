@@ -2,7 +2,6 @@ const noteModel = require("../models/noteSchema");
 
 const addNote = async (req, res) => {
   const { title, note } = req.body;
-  req.body.createdBy = req.user.userId;
   try {
     //Verified is field is fullfiled
     if (!title || !note) {
@@ -13,12 +12,15 @@ const addNote = async (req, res) => {
     }
 
     //create Note
-    const noteItem = await noteModel.create(req.body);
+    const noteItem = new noteModel({
+      createdBy: req.user.userId,
+      title,
+      note,
+    });
     await noteItem.save();
     res.status(200).json({
       success: true,
-      message: " Note created successfuly",
-      note: note,
+      message: " Your note has been created successfuly",
     });
   } catch (error) {
     return res.status(400).json({
@@ -29,20 +31,18 @@ const addNote = async (req, res) => {
 };
 //get all notes of the user
 const getNotes = async (req, res) => {
-  const { createdBy } = req.user.userId;
+  const { userId } = req.user;
   try {
-    const notes = await noteModel.find(createdBy);
+    const notes = await noteModel.find({ createdBy: userId });
+    //verify is not array is empty and return a message
+    if (notes.length === 0) {
+      throw new Error("You don't have any note for the moment !");
+    }
+
     res.status(200).json({
       success: true,
       notes: notes,
     });
-    //verify is not array is empty and return a message
-    if (notes.length === 0) {
-      res.status(200).json({
-        success: true,
-        message: "You don't have any note for the moment !",
-      });
-    }
   } catch (error) {
     return res.status(400).json({
       success: false,
@@ -52,13 +52,14 @@ const getNotes = async (req, res) => {
 };
 //update a note of the user
 const updateNote = async (req, res) => {
-  const noteId = req.params.noteid;
+  // const noteId = req.params.noteid;
+  const { noteId } = req.body;
   try {
     const note = await noteModel.findByIdAndUpdate(noteId, req.body);
     await note.save();
     res.status(200).json({
       success: true,
-      message: " Note updated successfuly",
+      message: " Your note has been updated successfuly",
     });
   } catch (error) {
     return res.status(400).json({
@@ -70,12 +71,13 @@ const updateNote = async (req, res) => {
 
 //delete a note of the user
 const deleteNote = async (req, res) => {
-  const noteId = req.params.noteid;
+  // const noteId = req.params.noteid;
+  const { noteId } = req.body;
   try {
     await noteModel.findByIdAndDelete(noteId);
     res.status(200).json({
       success: true,
-      message: " Note deleted successfuly",
+      message: " Your note has been deleted successfuly",
     });
   } catch (error) {
     res.status(400).json({
@@ -84,14 +86,15 @@ const deleteNote = async (req, res) => {
     });
   }
 };
-//delete a note of the user
+//delete all the notes of the user
 const deleteAllNote = async (req, res) => {
-  const noteId = req.params.noteid;
+  // const noteId = req.params.noteid;
+  const { userId } = req.user;
   try {
-    await noteModel.deleteMany();
+    await noteModel.deleteMany({ createdBy: userId });
     res.status(200).json({
       success: true,
-      message: " Notes deleted successfuly",
+      message: " Your notes has been deleted successfuly",
     });
   } catch (error) {
     res.status(400).json({
