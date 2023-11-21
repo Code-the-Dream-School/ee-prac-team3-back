@@ -100,4 +100,54 @@ const logOut = (req, res) => {
   }
 };
 
-module.exports = { signUp, logIn, logOut };
+/******************************************************
+ * @UPDATEUSER
+ * @route /api/v1/updateuser
+ * @method PUT
+ * @description singUp function for creating new user
+ * @body name, email, password, confirmPassword
+ * @returns User Object
+ ******************************************************/
+
+const updateUser = async (req, res) => {
+  try {
+    const { userId } = req.user; //retrieve user.id from jwtverify()
+    const user = await userModel.findByIdAndUpdate(userId, req.body);
+    return res.status(200).json({
+      success: true,
+      message: "User update successfuly",
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: "User not found ",
+    });
+  }
+};
+
+/******************************************************
+ * @DELETEUSER
+ * @route /api/v1/deleteuser
+ * @method DELETE
+ * @description singUp function for creating new user
+ * @body name, email, password, confirmPassword
+ * @returns User Object
+ ******************************************************/
+
+const deleteUser = async (req, res) => {
+  const { userId } = req.user; //retrieve user.id from jwtverify()
+  try {
+    const user = await userModel.findByIdAndDelete(userId);
+    return res.status(200).json({
+      success: true,
+      message: "User deleted successfuly",
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: "User not found ",
+    });
+  }
+};
+
+module.exports = { signUp, logIn, logOut, updateUser, deleteUser };
