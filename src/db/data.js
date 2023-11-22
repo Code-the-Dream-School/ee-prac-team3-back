@@ -31,6 +31,6 @@ const questions = [
     options: ["stringify()", "parse()", "convert()"],
   },
 ];
-const answers = [0, 1, 2, 1, 0];
+const answers = [0, 1, 2, 1, 0]; // answers should be compared with the one user has return
 
 module.exports = { title, category, questions, answers };
