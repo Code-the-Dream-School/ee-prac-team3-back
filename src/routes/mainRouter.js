@@ -20,7 +20,7 @@ router.get("/logout", logOut);
 //notes
 
 router.post("/addnote", authenticateUser, addNote);
-router.get("/getnote", authenticateUser, getNotes);
+router.get("/getnotes", authenticateUser, getNotes);
 router.put("/updatenote", authenticateUser, updateNote);
 router.delete("/deletenote", authenticateUser, deleteNote);
 router.delete("/deleteallnote", authenticateUser, deleteAllNote);

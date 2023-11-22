@@ -7,7 +7,7 @@ const addNote = async (req, res) => {
     if (!title || !note) {
       return res.status(400).json({
         success: false,
-        message: "Every field is required",
+        message: "The following fields are required: title,note",
       });
     }
 
@@ -21,6 +21,7 @@ const addNote = async (req, res) => {
     res.status(200).json({
       success: true,
       message: " Your note has been created successfuly",
+      noteItem,
     });
   } catch (error) {
     return res.status(400).json({
