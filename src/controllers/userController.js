@@ -74,6 +74,31 @@ const logIn = async (req, res) => {
 };
 
 /******************************************************
+ * @GETUSER
+ * @route /api/v1/login
+ * @method GET
+ * @description retrieve user data from mongoDb if user is valid(jwt auth)
+ * @returns User Object
+ ******************************************************/
+
+const getUser = async (req, res) => {
+  const { userId } = req.user;
+  try {
+    const user = await userModel.findById(userId);
+    return res.status(200).json({
+      success: true,
+      message: "User data got  sucessfully",
+      data: req.user,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+/******************************************************
  * @LOGOUT
  * @route /api/v1/logout
  * @method GET
@@ -104,7 +129,7 @@ const logOut = (req, res) => {
  * @UPDATEUSER
  * @route /api/v1/updateuser
  * @method PUT
- * @description singUp function for creating new user
+ * @description Update function for update user data
  * @body name, email, password, confirmPassword
  * @returns User Object
  ******************************************************/
@@ -137,7 +162,12 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   const { userId } = req.user; //retrieve user.id from jwtverify()
   try {
-    const user = await userModel.findByIdAndDelete(userId);
+    await userModel.findByIdAndDelete(userId);
+    const cookiesOptions = {
+      expires: new Date(),
+      httpOnly: true,
+    };
+    res.cookie("token", null, cookiesOptions);
     return res.status(200).json({
       success: true,
       message: "User deleted successfuly",
@@ -145,9 +175,9 @@ const deleteUser = async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       success: false,
-      message: "User not found ",
+      message: "User was already deleted successfuly  ",
     });
   }
 };
 
-module.exports = { signUp, logIn, logOut, updateUser, deleteUser };
+module.exports = { signUp, logIn, getUser, logOut, updateUser, deleteUser };
