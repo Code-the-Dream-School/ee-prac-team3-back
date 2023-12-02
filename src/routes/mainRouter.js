@@ -1,11 +1,11 @@
 const express = require("express");
 const { signUp, logIn, logOut } = require("../controllers/userController");
 const {
-  getQuestions,
-  insertQuestions,
-  dropQuestions,
-  getQuestion,
-} = require("../controllers/questionController");
+  getAllQuiz,
+  insertQuiz,
+  getQuizPerChoice,
+  deleteAllQuiz,
+} = require("../controllers/quizController");
 const signupDataValidate = require("../middlewares/signupDataValidate");
 const loginDataValidate = require("../middlewares/loginDataValidate");
 const authenticateUser = require("../middlewares/authenticateUser");
@@ -19,12 +19,12 @@ router.get("/logout", logOut);
 //questions
 
 router
-  .route("/questions")
-  .get(authenticateUser, getQuestions)
-  .post(authenticateUser, insertQuestions)
-  .delete(authenticateUser, dropQuestions);
+  .route("/quiz")
+  .get(authenticateUser, getAllQuiz)
+  .post(authenticateUser, insertQuiz)
+  .delete(authenticateUser, deleteAllQuiz);
 
 //question per category
-router.route("/question/category").get(authenticateUser, getQuestion);
+router.route("/quiz/category").get(authenticateUser, getQuizPerChoice);
 
 module.exports = router;

@@ -50,7 +50,11 @@ const quizSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
+  },
 });
 
-const quizModel = mongoose.model("Questions", quizSchema);
+const quizModel = mongoose.model("Quiz", quizSchema);
 module.exports = quizModel;

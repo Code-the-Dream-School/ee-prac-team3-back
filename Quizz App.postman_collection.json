@@ -23,7 +23,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"qwerty12345@gmail.com\",\n    \"password\":\"teamback3\"\n}",
+							"raw": "{\n    \"email\":\"bino26@gmail.com\",\n    \"password\":\"Bino26\" \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -49,7 +49,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"firstname\" : \"Binoooo\",\n    \"lastname\": \"Binooooo\",\n    \"username\":\"Bino2600\",\n     \"email\":\"qwerty12345@gmail.com\",\n    \"password\":\"teamback3\"\n     \n}",
+							"raw": "{\n    \"firstname\" : \"Bino\",\n    \"lastname\": \"Bino\",\n     \"email\":\"bino26@gmail.com\",\n    \"password\":\"Bino26\"\n     \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -108,6 +108,15 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\" : \"Bino\",\n    \"lastname\": \"Binocho\"\n     \n     \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{baseurl}}/updateuser",
 							"host": [
@@ -133,7 +142,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\" : \"7nd Mark\",\n    \"note\":\"Test lorem\"\n    \n}",
+							"raw": "{\n    \"title\" : \" 5ark\",\n    \"note\":\"Test lorem\"\n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -158,12 +167,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseurl}}/getnote",
+							"raw": "{{baseurl}}/getnotes",
 							"host": [
 								"{{baseurl}}"
 							],
 							"path": [
-								"getnote"
+								"getnotes"
 							]
 						}
 					},
@@ -202,7 +211,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "             \n{\"noteId\": \"65558e89596df65a61df2c48\",\n    \"title\" : \"6nd Mark\",\n    \"note\":\"Update lorem\"\n    \n}",
+							"raw": "             \n{\n    \"noteId\": \"655ad3afcdeb2fc9243eb4ac\",\n    \"title\" : \"6nd Mark\",\n    \"note\":\"Update lorem\"\n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -210,13 +219,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseurl}}/updatenote/655a9d4282d9e472061a5e1b",
+							"raw": "{{baseurl}}/updatenote",
 							"host": [
 								"{{baseurl}}"
 							],
 							"path": [
-								"updatenote",
-								"655a9d4282d9e472061a5e1b"
+								"updatenote"
 							]
 						}
 					},
@@ -246,7 +254,7 @@
 			"name": "Questions",
 			"item": [
 				{
-					"name": "Insert Questions",
+					"name": "Insert Quiz",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -264,7 +272,7 @@
 					"response": []
 				},
 				{
-					"name": "Question Per Category",
+					"name": "Quiz Per Choice",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -295,7 +303,7 @@
 					"response": []
 				},
 				{
-					"name": "Get all questions",
+					"name": "Get all quiz",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -313,7 +321,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete all the questions",
+					"name": "Delete all the quiz",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -324,6 +332,28 @@
 							],
 							"path": [
 								"questions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Add Admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/admin",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"admin"
 							]
 						}
 					},

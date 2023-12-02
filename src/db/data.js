@@ -1,36 +1,37 @@
-const title = "Javascript Basics";
-const category = "html";
+const title = "ReactBasics";
+const category = "react";
+const level = "middle";
+const label = "backend";
 
 const questions = [
   {
-    questionId: 1,
     questionText: "Javascript is an _______ language",
     options: ["Object-Oriented", "Object-Based", "Procedural"],
+    correctOption: "Object-Oriented",
   },
   {
-    questionId: 2,
     questionText:
       "Following methods can be used to display data in some form using Javascript",
     options: ["document.write()", "console.log()", "window.alert()"],
+    correctOption: "console.log()",
   },
   {
-    questionId: 3,
     questionText:
       "When an operator value is NULL, the typeof returned by the unary operator is:",
     options: ["Boolean", "Undefined", "Object"],
+    correctOption: "Object",
   },
   {
-    questionId: 4,
     questionText: "What does the toString() method return?",
     options: ["Return Object", "Return String", "Return Integer"],
+    correctOption: "Return String",
   },
   {
-    questionId: 5,
     questionText:
       "Which function is used to serialize an object into a JSON string?",
     options: ["stringify()", "parse()", "convert()"],
+    correctOption: "stringify()",
   },
 ];
-const answers = [0, 1, 2, 1, 0]; // answers should be compared with the one user has return
 
-module.exports = { title, category, questions, answers };
+module.exports = { title, category, level, label, questions };
