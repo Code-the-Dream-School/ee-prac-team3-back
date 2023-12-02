@@ -99,5 +99,29 @@ const logOut = (req, res) => {
     });
   }
 };
+/******************************************************
+ * @GETADMIN
+ * @route /api/v1/admin
+ * @method GET
+ * @description change the role of the user
+ * @returns User Object
+ ******************************************************/
 
-module.exports = { signUp, logIn, logOut };
+const getAdmin = async (req, res) => {
+  const { userId } = req.user;
+  try {
+    const user = await userModel.findById(userId);
+    return res.status(200).json({
+      success: true,
+      message: "You are now an admin",
+      data: user,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+module.exports = { signUp, logIn, logOut, getAdmin };
