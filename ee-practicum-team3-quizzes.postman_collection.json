@@ -1,0 +1,394 @@
+{
+	"info": {
+		"_postman_id": "781a216d-2c23-4ab0-af8c-c27757cfd268",
+		"name": "ee-practicum-team3-quizzes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26557606"
+	},
+	"item": [
+		{
+			"name": "add a test",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"JavaScript\", \"category\": \"javascript\", \"level\": \"basic\", \"label\":\"frontend\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/quizzes/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"quizzes",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-tests",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/quizzes/get-all-quizzes",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"quizzes",
+						"get-all-quizzes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-a-single-test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/quizzes/656bf725911470576d2b2bc7",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"quizzes",
+						"656bf725911470576d2b2bc7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update a test",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\":\"React\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/quizzes/656bf725911470576d2b2bc7",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"quizzes",
+						"656bf725911470576d2b2bc7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a test",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/quizzes/656bf4028257316d07bd614a",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"quizzes",
+						"656bf4028257316d07bd614a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-question-to-test",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"20+10\", \"quiz\":\"656bf725911470576d2b2bc7\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/quizzes/question/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"quizzes",
+						"question",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit-question",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"What is useEffect\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/quizzes/question/656bf47d8257316d07bd6152",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"quizzes",
+						"question",
+						"656bf47d8257316d07bd6152"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-answer-to-question",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\":\"What is React Hook\", \"quiz\":\"656b9b9571cd8fc10c89ffba\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/quizzes/questions/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"quizzes",
+						"questions",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-question",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/problem/656cf356be1dab11987127d1",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"problem",
+						"656cf356be1dab11987127d1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-questions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/quizzes/question/get-all-questions",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"quizzes",
+						"question",
+						"get-all-questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-answers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/v1/answer",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"answer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update answer",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/v1/answer/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"answer",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-answer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/answer/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"answer",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
