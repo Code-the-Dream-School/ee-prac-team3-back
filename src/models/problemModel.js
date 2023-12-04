@@ -5,6 +5,12 @@ const problemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  code: {
+    type: String,
+  },
+  resources: {
+    type: String,
+  },
   test: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "tests",

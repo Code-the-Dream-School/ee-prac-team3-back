@@ -16,12 +16,7 @@ const testSchema = new mongoose.Schema({
     type: [String],
     default: ["frontend", "backend"],
   },
-  code: {
-    type: String,
-  },
-  resources: {
-    type: String,
-  },
+
   problems: {
     type: [mongoose.Schema.Types.ObjectId],
     required: true,
