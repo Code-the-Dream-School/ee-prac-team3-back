@@ -11,6 +11,9 @@ connectToDb();
 
 const mainRouter = require("./routes/mainRouter.js");
 
+// error handler
+const notFound = require("./middlewares/not-found.js");
+
 // middleware
 app.use(cors({ origin: [process.env.CLIENT_URL], credentials: true })); //cross the app
 app.use(express.json());
@@ -22,5 +25,8 @@ app.use(favicon(__dirname + "/public/favicon.ico"));
 
 // routes
 app.use("/api/v1", mainRouter);
+
+//
+app.use(notFound);
 
 module.exports = app;
