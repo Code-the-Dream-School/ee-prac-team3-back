@@ -47,12 +47,13 @@ const quizSchema = new Schema({
         type: String,
         required: false,
       },
+      resources: {
+        type: String,
+        required: false,
+      },
     },
   ],
-  ressources: {
-    type: String,
-    required: false,
-  },
+
   createdAt: {
     type: Date,
     default: Date.now(),
