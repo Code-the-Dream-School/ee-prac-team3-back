@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"title\": \"JavaScript\", \"category\": \"javascript\", \"level\": \"basic\", \"label\":\"frontend\"}",
+					"raw": "{\"title\": \"Testing 2\", \"category\": \"react\", \"level\": \"basic\",  \"code\":\"console.log()\", \"resources\":\"abc\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/api/v1/quizzes/add",
+					"raw": "localhost:8000/api/v1/test",
 					"host": [
 						"localhost"
 					],
@@ -29,8 +29,7 @@
 					"path": [
 						"api",
 						"v1",
-						"quizzes",
-						"add"
+						"test"
 					]
 				}
 			},
@@ -54,7 +53,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/api/v1/quizzes/get-all-quizzes",
+					"raw": "localhost:8000/api/v1/test",
 					"host": [
 						"localhost"
 					],
@@ -62,8 +61,7 @@
 					"path": [
 						"api",
 						"v1",
-						"quizzes",
-						"get-all-quizzes"
+						"test"
 					]
 				}
 			},
@@ -87,7 +85,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/api/v1/quizzes/656bf725911470576d2b2bc7",
+					"raw": "localhost:8000/api/v1/test/656e4cfeb33aa06cee1ba226",
 					"host": [
 						"localhost"
 					],
@@ -95,8 +93,8 @@
 					"path": [
 						"api",
 						"v1",
-						"quizzes",
-						"656bf725911470576d2b2bc7"
+						"test",
+						"656e4cfeb33aa06cee1ba226"
 					]
 				}
 			},
@@ -109,7 +107,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"title\":\"React\"}",
+					"raw": "{\"title\":\"Testing twice\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -117,7 +115,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/api/v1/quizzes/656bf725911470576d2b2bc7",
+					"raw": "localhost:8000/api/v1/test/656e4cfeb33aa06cee1ba226",
 					"host": [
 						"localhost"
 					],
@@ -125,8 +123,8 @@
 					"path": [
 						"api",
 						"v1",
-						"quizzes",
-						"656bf725911470576d2b2bc7"
+						"test",
+						"656e4cfeb33aa06cee1ba226"
 					]
 				}
 			},
@@ -147,7 +145,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/api/v1/quizzes/656bf4028257316d07bd614a",
+					"raw": "localhost:8000/api/v1/test/656e4cfeb33aa06cee1ba226",
 					"host": [
 						"localhost"
 					],
@@ -155,8 +153,8 @@
 					"path": [
 						"api",
 						"v1",
-						"quizzes",
-						"656bf4028257316d07bd614a"
+						"test",
+						"656e4cfeb33aa06cee1ba226"
 					]
 				}
 			},
@@ -169,7 +167,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"title\": \"20+10\", \"quiz\":\"656bf725911470576d2b2bc7\"}",
+					"raw": "{\"title\":\"Second question\", \"testId\":\"656e4cdab33aa06cee1ba221\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -177,7 +175,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/api/v1/quizzes/question/add",
+					"raw": "localhost:8000/api/v1/problem",
 					"host": [
 						"localhost"
 					],
@@ -185,9 +183,7 @@
 					"path": [
 						"api",
 						"v1",
-						"quizzes",
-						"question",
-						"add"
+						"problem"
 					]
 				}
 			},
@@ -200,7 +196,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"title\": \"What is useEffect\"}",
+					"raw": "{\"title\": \"Third question\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -208,7 +204,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/api/v1/quizzes/question/656bf47d8257316d07bd6152",
+					"raw": "localhost:8000/api/v1/problem/656e4d5fb33aa06cee1ba235",
 					"host": [
 						"localhost"
 					],
@@ -216,9 +212,8 @@
 					"path": [
 						"api",
 						"v1",
-						"quizzes",
-						"question",
-						"656bf47d8257316d07bd6152"
+						"problem",
+						"656e4d5fb33aa06cee1ba235"
 					]
 				}
 			},
@@ -231,7 +226,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"title\":\"What is React Hook\", \"quiz\":\"656b9b9571cd8fc10c89ffba\"}",
+					"raw": "{\"text\":\"first answer\", \"problemId\":\"656e4d4cb33aa06cee1ba22f\", \"isCorrect\":\"true\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -239,7 +234,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/api/v1/quizzes/questions/add",
+					"raw": "localhost:8000/api/v1/answer",
 					"host": [
 						"localhost"
 					],
@@ -247,9 +242,7 @@
 					"path": [
 						"api",
 						"v1",
-						"quizzes",
-						"questions",
-						"add"
+						"answer"
 					]
 				}
 			},
@@ -270,7 +263,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/api/v1/problem/656cf356be1dab11987127d1",
+					"raw": "localhost:8000/api/v1/problem/656e4d5fb33aa06cee1ba235",
 					"host": [
 						"localhost"
 					],
@@ -279,7 +272,7 @@
 						"api",
 						"v1",
 						"problem",
-						"656cf356be1dab11987127d1"
+						"656e4d5fb33aa06cee1ba235"
 					]
 				}
 			},
@@ -303,7 +296,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/api/v1/quizzes/question/get-all-questions",
+					"raw": "localhost:8000/api/v1/problem",
 					"host": [
 						"localhost"
 					],
@@ -311,9 +304,7 @@
 					"path": [
 						"api",
 						"v1",
-						"quizzes",
-						"question",
-						"get-all-questions"
+						"problem"
 					]
 				}
 			},
@@ -321,9 +312,16 @@
 		},
 		{
 			"name": "get-all-answers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "localhost:8000/api/v1/answer",
 					"host": [
@@ -344,8 +342,17 @@
 			"request": {
 				"method": "PATCH",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"text\": \"second answer\", \"isCorrect\": true}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "localhost:8000/api/v1/answer/",
+					"raw": "localhost:8000/api/v1/answer/656e4df5b33aa06cee1ba248",
 					"host": [
 						"localhost"
 					],
@@ -354,7 +361,7 @@
 						"api",
 						"v1",
 						"answer",
-						""
+						"656e4df5b33aa06cee1ba248"
 					]
 				}
 			},
@@ -375,7 +382,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/api/v1/answer/",
+					"raw": "localhost:8000/api/v1/answer/656e4df5b33aa06cee1ba248",
 					"host": [
 						"localhost"
 					],
@@ -384,7 +391,7 @@
 						"api",
 						"v1",
 						"answer",
-						""
+						"656e4df5b33aa06cee1ba248"
 					]
 				}
 			},
