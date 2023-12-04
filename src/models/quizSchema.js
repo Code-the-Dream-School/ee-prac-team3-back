@@ -43,13 +43,13 @@ const quizSchema = new Schema({
         enum: ["radio", "checkbox"],
         default: "radio",
       },
+      code: {
+        type: String,
+        required: false,
+      },
     },
   ],
-  code: {
-    type: String,
-    required: false,
-  },
-  false: {
+  ressources: {
     type: String,
     required: false,
   },
