@@ -1,7 +1,7 @@
-const title = "ReactBasics";
-const category = "react";
-const level = "middle";
-const label = "backend";
+const title = "Javascript";
+const category = "javascript";
+const level = "advanced";
+const label = ["frontend", "backend"];
 
 const questions = [
   {
