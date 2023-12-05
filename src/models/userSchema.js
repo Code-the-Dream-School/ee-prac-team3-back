@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
 
@@ -16,13 +17,7 @@ const userSchema = new Schema({
     minLength: [3, "lastname must be at least 3 char"],
     maxLength: [15, "lastname must be less than 15 char"],
   },
-  username: {
-    type: String,
-    required: [true, "username must be required"],
-    minLength: [3, "username must be at least 3 char"],
-    maxLength: [15, "username must be less than 15 char"],
-    unique: [true, "username must be unique"],
-  },
+
   email: {
     type: String,
     required: [true, "email must be required"],
@@ -37,13 +32,15 @@ const userSchema = new Schema({
     enum: ["admin", "user"],
     default: "user",
   },
-  isActive: {
-    type: Boolean,
-    default: true,
-  },
   createdAt: {
     type: Date,
     default: Date.now(),
+  },
+  forgotPasswordToken: {
+    type: String,
+  },
+  forgotPasswordExpiryDate: {
+    type: Date,
   },
 });
 {
@@ -63,14 +60,27 @@ userSchema.methods = {
         id: this._id,
         firstname: this.firstname,
         lastname: this.lastname,
-        username: this.username,
         email: this.email,
         role: this.role,
-        isActive: this.isActive,
       },
       process.env.SECRET,
       { expiresIn: "24h" }
     );
+  },
+  //userSchema method for generating and return forgotPassword token
+  getForgotPasswordToken() {
+    const forgotToken = crypto.randomBytes(20).toString("hex");
+    //step 1 - save to DB
+    this.forgotPasswordToken = crypto
+      .createHash("sha256")
+      .update(forgotToken)
+      .digest("hex");
+
+    /// forgot password expiry date
+    this.forgotPasswordExpiryDate = Date.now() + 20 * 60 * 1000; // 20min
+
+    //step 2 - return values to user
+    return forgotToken;
   },
 };
 const userModel = mongoose.model("User", userSchema);
