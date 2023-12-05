@@ -88,7 +88,7 @@ const getUser = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "User data got  sucessfully",
-      data: user,
+      data: req.user,
     });
   } catch (error) {
     return res.status(400).json({
