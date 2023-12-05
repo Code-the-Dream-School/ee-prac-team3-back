@@ -88,7 +88,31 @@ const getUser = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "User data got  sucessfully",
-      data: req.user,
+      data: user,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+/******************************************************
+ * @GETADMIN
+ * @route /api/v1/admin
+ * @method GET
+ * @description retrieve user data from mongoDb if user is valid(jwt auth)
+ * @returns User Object
+ ******************************************************/
+
+const getAdmin = async (req, res) => {
+  const { userId } = req.user;
+  try {
+    const user = await userModel.findById(userId);
+    return res.status(200).json({
+      success: true,
+      message: "You are now an admin",
+      data: user,
     });
   } catch (error) {
     return res.status(400).json({
@@ -130,22 +154,47 @@ const logOut = (req, res) => {
  * @route /api/v1/updateuser
  * @method PUT
  * @description Update function for update user data
- * @body name, email, password, confirmPassword
+ * @body name, email,currentPassword,newPassword
  * @returns User Object
  ******************************************************/
 
 const updateUser = async (req, res) => {
   try {
     const { userId } = req.user; //retrieve user.id from jwtverify()
-    const user = await userModel.findByIdAndUpdate(userId, req.body);
+    const { firstname, lastname, email, newPassword, currentPassword } =
+      req.body;
+    let c;
+
+    // compare current password
+    if (newPassword && currentPassword) {
+      const user = await userModel.findById(userId);
+      if (!(await bcrypt.compare(currentPassword, user.password))) {
+        return res.status(400).json({
+          success: "false",
+          message: "Your current password is not correct! Try it again ",
+        });
+      }
+
+      //change password
+      c = await bcrypt.hash(newPassword, 10); //hash the new password
+    }
+
+    const t = await userModel.findByIdAndUpdate(
+      userId,
+
+      { firstname: firstname, lastname: lastname, email: email, password: c },
+      { new: true }
+    );
+    t.save();
     return res.status(200).json({
       success: true,
-      message: "User update successfuly",
+      message: "User data updated successfuly",
+      data: t,
     });
   } catch (error) {
     return res.status(400).json({
       success: false,
-      message: "User not found ",
+      message: error.message, //"User not found "
     });
   }
 };
@@ -180,4 +229,12 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { signUp, logIn, getUser, logOut, updateUser, deleteUser };
+module.exports = {
+  signUp,
+  logIn,
+  getUser,
+  getAdmin,
+  logOut,
+  updateUser,
+  deleteUser,
+};
