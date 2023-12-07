@@ -1,17 +1,17 @@
 const { StatusCodes } = require("http-status-codes");
 const Problem = require("../models/problemModel");
 const Answer = require("../models/answerModel");
-const Joi = require("joi");
-const schema = Joi.object({ problemId: Joi.string().required() });
+/* const Joi = require("joi");
+const schema = Joi.object({ problemId: Joi.string().required() }); */
 
 // add answer to question
 
 const createAnswer = async (req, res) => {
   try {
-    await schema.validateAsync({
+    /*   await schema.validateAsync({
       problemId: req.body.problemId,
-    });
-    const problem = await Problem.findOne({ _id: req.body.problemId });
+    }); */
+    const problem = await Problem.findOne({ _id: req.body.problem });
     const newAnswer = new Answer(req.body);
     const answer = await newAnswer.save();
     problem.answers.push(answer._id);

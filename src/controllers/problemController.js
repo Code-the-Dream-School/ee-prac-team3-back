@@ -1,8 +1,8 @@
 const { StatusCodes } = require("http-status-codes");
 const Problem = require("../models/problemModel");
 const Test = require("../models/testModel");
-const Joi = require("joi");
-const schema = Joi.object({ testId: Joi.string().required() });
+/* const Joi = require("joi");
+const schema = Joi.object({ testId: Joi.string().required() }); */
 
 // get all questions
 
@@ -19,10 +19,10 @@ const getAllProblems = async (req, res) => {
 
 const createProblem = async (req, res) => {
   try {
-    await schema.validateAsync({
+    /*   await schema.validateAsync({
       testId: req.body.testId,
-    });
-    const test = await Test.findById(req.body.testId);
+    }); */
+    const test = await Test.findById(req.body.test);
     const newProblem = new Problem(req.body);
     const problem = await newProblem.save();
     test.problems.push(problem._id);
