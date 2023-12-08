@@ -109,6 +109,13 @@ const getAdmin = async (req, res) => {
   const { userId } = req.user;
   try {
     const user = await userModel.findById(userId);
+    //update cookies
+    const token = user.jwtToken();
+    const cookiesOptions = {
+      maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true,
+    };
+    res.cookie("token", token, cookiesOptions);
     return res.status(200).json({
       success: true,
       message: "You are now an admin",
@@ -161,8 +168,14 @@ const logOut = (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { userId } = req.user; //retrieve user.id from jwtverify()
-    const { firstname, lastname, email, newPassword, currentPassword } =
-      req.body;
+    const {
+      firstname,
+      lastname,
+      email,
+      newPassword,
+      currentPassword,
+      avatarURL,
+    } = req.body;
     let c;
 
     // compare current password
@@ -182,10 +195,23 @@ const updateUser = async (req, res) => {
     const t = await userModel.findByIdAndUpdate(
       userId,
 
-      { firstname: firstname, lastname: lastname, email: email, password: c },
+      {
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: c,
+        avatarURL: avatarURL,
+      },
       { new: true }
     );
     t.save();
+    //update cookies
+    const token = t.jwtToken();
+    const cookiesOptions = {
+      maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true,
+    };
+    res.cookie("token", token, cookiesOptions);
     return res.status(200).json({
       success: true,
       message: "User data updated successfuly",

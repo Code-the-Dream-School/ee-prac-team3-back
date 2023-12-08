@@ -26,14 +26,13 @@ const userSchema = new Schema({
     type: String,
     required: [true, "password must be required"],
   },
+  avatarURL: {
+    type: String,
+  },
   role: {
     type: String,
     enum: ["admin", "user"],
     default: "user",
-  },
-  isActive: {
-    type: Boolean,
-    default: true,
   },
   createdAt: {
     type: Date,
@@ -59,7 +58,7 @@ userSchema.methods = {
         lastname: this.lastname,
         email: this.email,
         role: this.role,
-        isActive: this.isActive,
+        avatarURL: this.avatarURL,
       },
       process.env.SECRET,
       { expiresIn: "24h" }
