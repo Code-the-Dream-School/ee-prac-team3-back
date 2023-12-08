@@ -22,6 +22,14 @@ const {
   updateAnswer,
   deleteAnswer,
 } = require("../controllers/answerController");
+const {
+  createAttempt,
+  getMaxScoreAttempts,
+  getLatestScoreAttempts,
+  deleteAttempt,
+  getAllAttempts,
+} = require("../controllers/attemptController");
+
 const router = express.Router();
 
 //user
@@ -44,5 +52,15 @@ router.route("/problem/:id").patch(updateProblem).delete(deleteProblem);
 // answers
 router.route("/answer").post(createAnswer).get(getAllAnswers);
 router.route("/answer/:id").patch(updateAnswer).delete(deleteAnswer);
+
+// user progress
+router.route("/progress", authenticateUser).post(createAttempt);
+
+router.route("/progress/maxscore", authenticateUser).get(getMaxScoreAttempts);
+router
+  .route("/progress/currentscore", authenticateUser)
+  .get(getLatestScoreAttempts);
+router.route("/progress").get(getAllAttempts);
+router.route("/progress/:id").delete(deleteAttempt);
 
 module.exports = router;

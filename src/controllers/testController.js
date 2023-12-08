@@ -3,10 +3,12 @@ const Test = require("../models/testModel");
 
 // get all tests
 const getAllTests = async (req, res) => {
-  const tests = await Test.find({}).populate({
-    path: "problems",
-    populate: { path: "answers" },
-  });
+  const tests = await Test.find({})
+    .sort({ title: 1 })
+    .populate({
+      path: "problems",
+      populate: { path: "answers" },
+    });
   res.status(StatusCodes.OK).json({
     tests,
     count: tests.length,
@@ -37,14 +39,13 @@ const getSingleTest = async (req, res) => {
 //create a test
 const createTest = async (req, res) => {
   try {
-    // req.body.problems = [];
     const newTest = new Test(req.body);
     await newTest.save();
-    res.send({
+    res.status(StatusCodes.CREATED).send({
       message: "Quiz added successfully",
     });
   } catch (error) {
-    res.status(StatusCodes.CREATED).send({
+    res.status(500).send({
       message: error.message,
     });
   }

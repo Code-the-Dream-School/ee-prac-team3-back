@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"title\": \"Testing 2\", \"category\": \"react\", \"level\": \"basic\",  \"code\":\"console.log()\", \"resources\":\"abc\"}",
+					"raw": "{\"title\": \"Testing 2\", \"category\": \"react\", \"level\": \"basic\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -167,7 +167,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"title\":\"Second question\", \"testId\":\"656e4cdab33aa06cee1ba221\"}",
+					"raw": "{\"title\":\"Seventh question\", \"test\":\"656f5425cf8a88f9c86ffed4\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -226,7 +226,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"text\":\"first answer\", \"problemId\":\"656e4d4cb33aa06cee1ba22f\", \"isCorrect\":\"true\"}",
+					"raw": "{\"text\":\"first answer\", \"problem\":\"657142d9c35e8cdc4116d853\", \"isCorrect\":\"true\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -263,7 +263,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/api/v1/problem/656e4d5fb33aa06cee1ba235",
+					"raw": "localhost:8000/api/v1/problem/656f546acf8a88f9c86ffee1",
 					"host": [
 						"localhost"
 					],
@@ -272,7 +272,7 @@
 						"api",
 						"v1",
 						"problem",
-						"656e4d5fb33aa06cee1ba235"
+						"656f546acf8a88f9c86ffee1"
 					]
 				}
 			},
@@ -392,6 +392,360 @@
 						"v1",
 						"answer",
 						"656e4df5b33aa06cee1ba248"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"firstname\" : \"testing\", \"lastname\": \"testing\", \"email\":\"testing@gmail.com\", \"password\":\"secret\", \"username\":\"testing\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"testing@gmail.com\", \"password\":\"secret\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a note",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY4MzI5NmVkNDNkYTE1NTljMjU0NjQiLCJpYXQiOjE3MDE0ODU5MjksImV4cCI6MTcwNjY2OTkyOX0.3lTCM9ZupRspRBM09z-dTmx43NMciTaQ_pbMf-d7zyM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\" : \"What is your last name\",\"note\":\"My last name is \"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/addnote",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"addnote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get notes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY4MzI5NmVkNDNkYTE1NTljMjU0NjQiLCJpYXQiOjE3MDE0ODU5MjksImV4cCI6MTcwNjY2OTkyOX0.3lTCM9ZupRspRBM09z-dTmx43NMciTaQ_pbMf-d7zyM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/getnote",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"getnote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update note",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"noteId\": \"65716442fefe53e05f273913\",\"title\" : \"What is your second name\",\"note\":\"My second name\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/updatenote",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"updatenote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a note",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"noteId\": \"65716442fefe53e05f273913\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/deletenote",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"deletenote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create an attempt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"test\":\"656f5425cf8a88f9c86ffed4\", \"score\":\"10\", \"user\":\"656fa2606f05326b3a09e566\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/progress",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"progress"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get max score attempts by user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/progress/maxscore?userId=656fa2606f05326b3a09e566",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"progress",
+						"maxscore"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "656fa2606f05326b3a09e566"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get current score attempts by user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/progress/currentscore?userId=656fa2606f05326b3a09e566",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"progress",
+						"currentscore"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "656fa2606f05326b3a09e566"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete attempt",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/progress/65736870b22599936ab4d759",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"progress",
+						"65736870b22599936ab4d759"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all attempts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/v1/progress",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"progress"
 					]
 				}
 			},
