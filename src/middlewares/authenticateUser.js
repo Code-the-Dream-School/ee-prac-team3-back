@@ -19,9 +19,8 @@ const authenticateUser = (req, res, next) => {
       email: payload.email,
       firstname: payload.firstname,
       lastname: payload.lastname,
-      username: payload.username,
       role: payload.role,
-      isActive: payload.isActive,
+      avatarURL: payload.avatarURL,
       accessToken: token,
     };
 

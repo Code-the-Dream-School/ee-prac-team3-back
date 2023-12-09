@@ -4,6 +4,7 @@ const {
   logIn,
   logOut,
   getAdmin,
+  getUser,
 } = require("../controllers/userController");
 const signupDataValidate = require("../middlewares/signupDataValidate");
 const loginDataValidate = require("../middlewares/loginDataValidate");
@@ -13,7 +14,10 @@ const router = express.Router();
 
 //user
 router.post("/signup", signupDataValidate, signUp);
-router.route("/login").post(loginDataValidate, logIn).get(authenticateUser);
+router
+  .route("/login")
+  .post(loginDataValidate, logIn)
+  .get(authenticateUser, getUser);
 router.get("/logout", logOut);
 
 //admin
