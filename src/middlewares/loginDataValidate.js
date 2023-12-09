@@ -1,6 +1,6 @@
 const loginDataValidate = (req, res, next) => {
   const { email, password } = req.body;
-  //verify if eevery field is fulled
+  //verify if every field is fulled
 
   if (!email || !password) {
     return res.status(400).json({
