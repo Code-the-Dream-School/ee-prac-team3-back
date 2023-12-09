@@ -1,5 +1,10 @@
 const express = require("express");
-const { signUp, logIn, logOut } = require("../controllers/userController");
+const {
+  signUp,
+  logIn,
+  logOut,
+  getUser,
+} = require("../controllers/userController");
 const {
   addNote,
   getNotes,
@@ -14,7 +19,10 @@ const router = express.Router();
 
 //user
 router.post("/signup", signupDataValidate, signUp);
-router.route("/login").post(loginDataValidate, logIn).get(authenticateUser);
+router
+  .route("/login")
+  .post(loginDataValidate, logIn)
+  .get(authenticateUser, getUser);
 router.get("/logout", logOut);
 
 //notes
