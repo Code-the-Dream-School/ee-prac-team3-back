@@ -1,5 +1,4 @@
 const express = require("express");
-const { signUp, logIn, logOut } = require("../controllers/userController");
 const {
   getAllQuiz,
   insertQuiz,
