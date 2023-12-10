@@ -28,12 +28,12 @@ const createAttempt = async (req, res) => {
 };
 
 // get max score for every quiz by user, but for the latest attempt
-const getMaxScoreAttempts = async (req, res) => {
+const maxScoreAttempts = async (userId) => {
   try {
     //rank
     const attempts = await Attempt.aggregate([
       {
-        $match: { user: new ObjectId(`${req.query.userId}`) },
+        $match: { user: userId },
       },
       {
         $setWindowFields: {
@@ -50,26 +50,23 @@ const getMaxScoreAttempts = async (req, res) => {
       {
         $match: { rankScoreForTest: 1 },
       },
+      {
+        $project: { test: 1, maxScore: "$score" },
+      },
     ]);
+    return attempts;
     //
-    res.status(StatusCodes.OK).send({
-      message: "Attempts fetched successfully",
-      data: attempts,
-    });
   } catch (error) {
-    res.status(500).send({
-      message: error.message,
-    });
+    return error;
   }
 };
 
 // get latest score for every quiz by user: sortBy attempNumber in descending order
-const getLatestScoreAttempts = async (req, res) => {
+const latestScoreAttempts = async (userId) => {
   try {
-    //rank
     const attempts = await Attempt.aggregate([
       {
-        $match: { user: new ObjectId(`${req.query.userId}`) },
+        $match: { user: userId },
       },
       {
         $setWindowFields: {
@@ -86,10 +83,30 @@ const getLatestScoreAttempts = async (req, res) => {
         $match: { rankScoreForTest: 1 },
       },
     ]);
-    //
+
+    return attempts;
+  } catch (error) {
+    return error;
+  }
+};
+
+// combine latestScoreAttempts & maxScoreAttempts
+const getUserAttempts = async (req, res) => {
+  try {
+    const user = new ObjectId(`${req.query.userId}`);
+    const maxAttempts = await maxScoreAttempts(user);
+    const currentAttempts = await latestScoreAttempts(user);
+    const mergeResult = maxAttempts.map((attempt) => {
+      console.log("attempt", attempt);
+      let matchedAttempt = currentAttempts.find((item) =>
+        // equals for comparing equality of objects
+        item.test.equals(attempt.test)
+      );
+      return Object.assign({}, attempt, matchedAttempt);
+    });
     res.status(StatusCodes.OK).send({
       message: "Attempts fetched successfully",
-      data: attempts,
+      data: mergeResult,
     });
   } catch (error) {
     res.status(500).send({
@@ -98,7 +115,7 @@ const getLatestScoreAttempts = async (req, res) => {
   }
 };
 
-// get all attempts
+// get all attempts !only for testing!
 const getAllAttempts = async (req, res) => {
   const attempts = await Attempt.find({});
   res.status(StatusCodes.OK).json({
@@ -107,7 +124,7 @@ const getAllAttempts = async (req, res) => {
   });
 };
 
-// delete attempt
+// delete attempt !only for testing!
 const deleteAttempt = async (req, res) => {
   try {
     const {
@@ -124,9 +141,8 @@ const deleteAttempt = async (req, res) => {
 };
 
 module.exports = {
-  getMaxScoreAttempts,
+  getUserAttempts,
   createAttempt,
-  getLatestScoreAttempts,
   getAllAttempts,
   deleteAttempt,
 };

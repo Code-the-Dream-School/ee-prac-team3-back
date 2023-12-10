@@ -24,10 +24,9 @@ const {
 } = require("../controllers/answerController");
 const {
   createAttempt,
-  getMaxScoreAttempts,
-  getLatestScoreAttempts,
   deleteAttempt,
   getAllAttempts,
+  getUserAttempts,
 } = require("../controllers/attemptController");
 
 const router = express.Router();
@@ -55,11 +54,9 @@ router.route("/answer/:id").patch(updateAnswer).delete(deleteAnswer);
 
 // user progress
 router.route("/progress", authenticateUser).post(createAttempt);
+router.route("/progress/user", authenticateUser).get(getUserAttempts);
 
-router.route("/progress/maxscore", authenticateUser).get(getMaxScoreAttempts);
-router
-  .route("/progress/currentscore", authenticateUser)
-  .get(getLatestScoreAttempts);
+// for testing only
 router.route("/progress").get(getAllAttempts);
 router.route("/progress/:id").delete(deleteAttempt);
 
