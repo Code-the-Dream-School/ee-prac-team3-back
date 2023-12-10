@@ -85,7 +85,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/api/v1/test/656e4cfeb33aa06cee1ba226",
+					"raw": "localhost:8000/api/v1/test/656e4cdab33aa06cee1ba221",
 					"host": [
 						"localhost"
 					],
@@ -94,7 +94,7 @@
 						"api",
 						"v1",
 						"test",
-						"656e4cfeb33aa06cee1ba226"
+						"656e4cdab33aa06cee1ba221"
 					]
 				}
 			},
@@ -624,84 +624,6 @@
 			"response": []
 		},
 		{
-			"name": "get max score attempts by user",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8000/api/v1/progress/maxscore?userId=656fa2606f05326b3a09e566",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"api",
-						"v1",
-						"progress",
-						"maxscore"
-					],
-					"query": [
-						{
-							"key": "userId",
-							"value": "656fa2606f05326b3a09e566"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get current score attempts by user",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8000/api/v1/progress/currentscore?userId=656fa2606f05326b3a09e566",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"api",
-						"v1",
-						"progress",
-						"currentscore"
-					],
-					"query": [
-						{
-							"key": "userId",
-							"value": "656fa2606f05326b3a09e566"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "delete attempt",
 			"request": {
 				"method": "DELETE",
@@ -746,6 +668,33 @@
 						"api",
 						"v1",
 						"progress"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user progress",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/v1/progress/user?userId=656fa2606f05326b3a09e566",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"progress",
+						"user"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "656fa2606f05326b3a09e566"
+						}
 					]
 				}
 			},
