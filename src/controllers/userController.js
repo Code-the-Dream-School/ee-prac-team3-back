@@ -74,6 +74,62 @@ const logIn = async (req, res) => {
 };
 
 /******************************************************
+ * @GETUSER
+ * @route /api/v1/login
+ * @method GET
+ * @description retrieve user data from mongoDb if user is valid(jwt auth)
+ * @returns User Object
+ ******************************************************/
+
+const getUser = async (req, res) => {
+  const { userId } = req.user;
+  try {
+    const user = await userModel.findById(userId);
+    return res.status(200).json({
+      success: true,
+      message: "User data got  sucessfully",
+      data: req.user,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+/******************************************************
+ * @GETADMIN
+ * @route /api/v1/admin
+ * @method GET
+ * @description retrieve user data from mongoDb if user is valid(jwt auth)
+ * @returns User Object
+ ******************************************************/
+
+const getAdmin = async (req, res) => {
+  const { userId } = req.user;
+  try {
+    const user = await userModel.findById(userId);
+    //update cookies
+    const token = user.jwtToken();
+    const cookiesOptions = {
+      maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true,
+    };
+    res.cookie("token", token, cookiesOptions);
+    return res.status(200).json({
+      success: true,
+      message: "You are now an admin",
+      data: user,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+/******************************************************
  * @LOGOUT
  * @route /api/v1/logout
  * @method GET
@@ -100,4 +156,4 @@ const logOut = (req, res) => {
   }
 };
 
-module.exports = { signUp, logIn, logOut };
+module.exports = { signUp, logIn, getUser, logOut, getAdmin };
