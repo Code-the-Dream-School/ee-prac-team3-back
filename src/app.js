@@ -10,6 +10,7 @@ const cookieParser = require("cookie-parser");
 connectToDb();
 
 const mainRouter = require("./routes/mainRouter.js");
+const testRouter = require("./routes/testRouter.js");
 
 // middleware
 
