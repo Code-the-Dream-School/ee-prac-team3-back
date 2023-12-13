@@ -16,6 +16,11 @@ const {
 const signupDataValidate = require("../middlewares/signupDataValidate");
 const loginDataValidate = require("../middlewares/loginDataValidate");
 const authenticateUser = require("../middlewares/authenticateUser");
+const {
+  removeFavoriteQuiz,
+  addFavoriteQuiz,
+  getUserFavorites,
+} = require("../controllers/favoriteController");
 const router = express.Router();
 
 //user
@@ -39,5 +44,10 @@ router
 
 //question per category
 router.route("/quiz/category").get(authenticateUser, getQuizPerChoice);
+
+//Favorites
+router.get("/favorites", authenticateUser, getUserFavorites);
+router.post("/favorites/add", authenticateUser, addFavoriteQuiz);
+router.post("/favorites/remove", authenticateUser, removeFavoriteQuiz);
 
 module.exports = router;
