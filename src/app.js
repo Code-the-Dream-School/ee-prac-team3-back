@@ -24,4 +24,6 @@ app.use(favicon(__dirname + "/public/favicon.ico"));
 // routes
 app.use("/api/v1", mainRouter);
 
+app.use("/", testRouter);
+
 module.exports = app;
