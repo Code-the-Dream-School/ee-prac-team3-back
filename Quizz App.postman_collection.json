@@ -23,7 +23,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"bino26@gmail.com\",\n    \"password\":\"Bino26\" \n}",
+							"raw": "{\n    \"email\":\"bin55@gmail.com\",\n    \"password\":\"Bino260\" \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -49,7 +49,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"firstname\" : \"Bino\",\n    \"lastname\": \"Bino\",\n     \"email\":\"bino26@gmail.com\",\n    \"password\":\"Bino26\"\n     \n}",
+							"raw": "{\n    \"firstname\" : \"Biw6o5\",\n    \"lastname\": \"Biw6o5\",\n     \"email\":\"bin55@gmail.com\",\n    \"password\":\"Bino260\"\n\n     \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -110,7 +110,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"firstname\" : \"Bino\",\n    \"lastname\": \"Binocho\"\n     \n     \n}",
+							"raw": "{\n    \"firstname\" : \"Buiiio\",\n    \"lastname\": \"Bino\",\n    \"avatarURL\":\"https://gravatar.com/avatar/205e460b479e2e5b48aec07710c080\"\n    \n   \n    \n     \n     \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -124,6 +124,59 @@
 							],
 							"path": [
 								"updateuser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"bin55@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/forgotpassword",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"forgotpassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\":\"Qwerty123456\",\n    \"confirmPassword\":\"Qwerty123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/resetpassword/31185ead5759192a38ff31524f6831035478845a",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"resetpassword",
+								"31185ead5759192a38ff31524f6831035478845a"
 							]
 						}
 					},
@@ -259,12 +312,12 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{baseurl}}/questions",
+							"raw": "{{baseurl}}/quiz",
 							"host": [
 								"{{baseurl}}"
 							],
 							"path": [
-								"questions"
+								"quiz"
 							]
 						},
 						"description": "The questions are updated directly by data.js to the database"
@@ -281,7 +334,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"category\" : \"javascript\"\n}",
+							"raw": "{\n    \"category\":\"javascript\",\n    \n    \"label\":[\"frontend\"]\n    \n    \n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -289,12 +342,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseurl}}/question/category",
+							"raw": "{{baseurl}}/quiz/category",
 							"host": [
 								"{{baseurl}}"
 							],
 							"path": [
-								"question",
+								"quiz",
 								"category"
 							]
 						},
@@ -308,12 +361,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseurl}}/questions",
+							"raw": "{{baseurl}}/quiz",
 							"host": [
 								"{{baseurl}}"
 							],
 							"path": [
-								"questions"
+								"quiz"
 							]
 						},
 						"description": "Get all the questions added in the databse"
@@ -354,6 +407,64 @@
 							],
 							"path": [
 								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Favorites",
+			"item": [
+				{
+					"name": "Add Quiz Favorite",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/favorites/add",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"favorites",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Favorites Quiz",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/favorites",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Quiz Favorite",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/favorites/remove",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"favorites",
+								"remove"
 							]
 						}
 					},
