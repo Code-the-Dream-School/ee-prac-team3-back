@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "da3396ca-bca5-4f6b-96d8-a87da20acc13",
+		"name": "ee-practicum-userProgress",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26557606"
+	},
+	"item": [
+		{
+			"name": "register user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"firstname\" : \"person2\", \"lastname\": \"person2\", \"email\":\"person2@gmail.com\", \"password\":\"person2\", \"username\":\"person2\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"person1@gmail.com\", \"password\":\"person1\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all quizzes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY4MzI5NmVkNDNkYTE1NTljMjU0NjQiLCJpYXQiOjE3MDE0ODU5MjksImV4cCI6MTcwNjY2OTkyOX0.3lTCM9ZupRspRBM09z-dTmx43NMciTaQ_pbMf-d7zyM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/quiz",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create an attempt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"test\":\"656e139169912c080cfaa31f\", \"score\":\"10\", \"user\":\"657a451cbc856ec118de6d82\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/progress/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"progress",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all attempts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/progress",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"progress"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user max score, current score, attempt number by quiz",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/v1/progress/user?userId=657a451cbc856ec118de6d82",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"progress",
+						"user"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "657a451cbc856ec118de6d82"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete attempt",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/v1/progress/657a3663e96f49611793f8e3",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"progress",
+						"657a3663e96f49611793f8e3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
