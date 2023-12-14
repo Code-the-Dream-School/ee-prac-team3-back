@@ -108,7 +108,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"test\":\"656e139169912c080cfaa31f\", \"score\":\"10\", \"user\":\"657a451cbc856ec118de6d82\"}",
+					"raw": "{\"quiz\":\"656e130a05ab7f6428c0318e\", \"score\":\"100\", \"user\":\"657a451cbc856ec118de6d82\"}",
 					"options": {
 						"raw": {
 							"language": "json"

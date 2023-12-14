@@ -1,6 +1,10 @@
 const { StatusCodes } = require("http-status-codes");
 const Attempt = require("../models/attemptModel");
 const { default: mongoose } = require("mongoose");
+const {
+  maxScoreAttempts,
+  latestScoreAttempts,
+} = require("../functions/attempts");
 const ObjectId = mongoose.Types.ObjectId;
 
 // add attempt
@@ -10,7 +14,7 @@ const createAttempt = async (req, res) => {
     const latestAttempt = await Attempt.find()
       .sort({ _id: -1 })
       .findOne({ user: req.body.user })
-      .findOne({ test: req.body.test });
+      .findOne({ quiz: req.body.quiz });
     const newAttempt = new Attempt(req.body);
     // increment
     latestAttempt
@@ -27,74 +31,12 @@ const createAttempt = async (req, res) => {
   }
 };
 
-// get max score for every quiz by user, but for the latest attempt
-const maxScoreAttempts = async (userId) => {
-  try {
-    //rank
-    const attempts = await Attempt.aggregate([
-      {
-        $match: { user: userId },
-      },
-      {
-        $setWindowFields: {
-          partitionBy: "$test",
-          sortBy: { score: -1 },
-          //sortBy: { attemptNumber: -1 },
-          output: {
-            rankScoreForTest: {
-              $rank: {},
-            },
-          },
-        },
-      },
-      {
-        $match: { rankScoreForTest: 1 },
-      },
-      {
-        $project: { test: 1, maxScore: "$score" },
-      },
-    ]);
-    return attempts;
-    //
-  } catch (error) {
-    return error;
-  }
-};
-
-// get latest score for every quiz by user: sortBy attempNumber in descending order
-const latestScoreAttempts = async (userId) => {
-  try {
-    const attempts = await Attempt.aggregate([
-      {
-        $match: { user: userId },
-      },
-      {
-        $setWindowFields: {
-          partitionBy: "$test",
-          sortBy: { attemptNumber: -1 },
-          output: {
-            rankScoreForTest: {
-              $rank: {},
-            },
-          },
-        },
-      },
-      {
-        $match: { rankScoreForTest: 1 },
-      },
-    ]);
-
-    return attempts;
-  } catch (error) {
-    return error;
-  }
-};
-
 // combine latestScoreAttempts & maxScoreAttempts
 const getUserAttempts = async (req, res) => {
   try {
     const user = new ObjectId(`${req.query.userId}`);
     const maxAttempts = await maxScoreAttempts(user);
+    console.log("maxScoreattempts", maxScoreAttempts);
     console.log("maxAttempts", maxAttempts);
     const currentAttempts = await latestScoreAttempts(user);
     console.log("currentAttempts", currentAttempts);
@@ -102,7 +44,7 @@ const getUserAttempts = async (req, res) => {
       console.log("attempt", attempt);
       let matchedAttempt = currentAttempts.find((item) =>
         // equals for comparing equality of objects
-        item.test.equals(attempt.test)
+        item.quiz.equals(attempt.quiz)
       );
       return Object.assign({}, attempt, matchedAttempt);
     });
