@@ -1,0 +1,365 @@
+{
+	"info": {
+		"_postman_id": "caf47c46-3e82-45a0-8296-4dfdeaf6e7e7",
+		"name": "Quizz App",
+		"description": "The Quizz App is a our practicum project . We used MERN (MongoDB ,Express,React,Node.js) for this project .\n\nFeatures :\n\n- User Authentication\n    \n- Differents roles(user,admin )\n    \n- Quiz(user should have to response and get points)\n    \n- Admin can add question , update and delete questions\n    \n- User can use a sheet for write important note\n    \n- Admin can get all the results form the user",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28904684"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Log In",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"bino26@gmail.com\",\n    \"password\":\"Bino26\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/login",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\" : \"Bino\",\n    \"lastname\": \"Bino\",\n     \"email\":\"bino26@gmail.com\",\n    \"password\":\"Bino26\"\n     \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/signup",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Log Out",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/logout",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/deleteuser",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"deleteuser"
+							]
+						},
+						"description": "Delete User helps us to delete user by his id .  \nThe next will be to delete user wilth all his data(notes,answers....)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User data",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\" : \"Bino\",\n    \"lastname\": \"Binocho\"\n     \n     \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/updateuser",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"updateuser"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "User is a folder who contains all about user authentication and user data ."
+		},
+		{
+			"name": "Notes",
+			"item": [
+				{
+					"name": "Add Note",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\" : \" 5ark\",\n    \"note\":\"Test lorem\"\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/addnote",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"addnote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Notes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/getnotes",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"getnotes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Note",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"noteId\": \"655ad3afcdeb2fc9243eb4ac\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/deletenote",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"deletenote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Note",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "             \n{\n    \"noteId\": \"655ad3afcdeb2fc9243eb4ac\",\n    \"title\" : \"6nd Mark\",\n    \"note\":\"Update lorem\"\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/updatenote",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"updatenote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All Note",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}//deleteallnote",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"",
+								"deleteallnote"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Questions",
+			"item": [
+				{
+					"name": "Insert Quiz",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/questions",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"questions"
+							]
+						},
+						"description": "The questions are updated directly by data.js to the database"
+					},
+					"response": []
+				},
+				{
+					"name": "Quiz Per Choice",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category\" : \"javascript\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/question/category",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"question",
+								"category"
+							]
+						},
+						"description": "Get question per category (javascript,html,react,css ...)\n\nI want that the frontend should return the category choose for the quiz"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all quiz",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/questions",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"questions"
+							]
+						},
+						"description": "Get all the questions added in the databse"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all the quiz",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/questions",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"questions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Add Admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/admin",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

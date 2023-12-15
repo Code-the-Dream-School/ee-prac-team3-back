@@ -1,5 +1,11 @@
 const express = require("express");
 const {
+  getAllQuiz,
+  insertQuiz,
+  getQuizPerChoice,
+  deleteAllQuiz,
+} = require("../controllers/quizController");
+const {
   signUp,
   logIn,
   getUser,
@@ -10,6 +16,12 @@ const {
 const signupDataValidate = require("../middlewares/signupDataValidate");
 const loginDataValidate = require("../middlewares/loginDataValidate");
 const authenticateUser = require("../middlewares/authenticateUser");
+const {
+  createAttempt,
+  getUserAttempts,
+  getAllAttempts,
+  deleteAttempt,
+} = require("../controllers/attemptController");
 const router = express.Router();
 
 //user
@@ -22,5 +34,26 @@ router
 router.get("/logout", logOut);
 router.put("/updateuser", authenticateUser, updateUser);
 router.delete("/deleteuser", authenticateUser, deleteUser);
+
+//questions
+
+router
+  .route("/quiz")
+  .get(authenticateUser, getAllQuiz)
+  .post(authenticateUser, insertQuiz)
+  .delete(authenticateUser, deleteAllQuiz);
+
+//question per category
+router.route("/quiz/category").get(authenticateUser, getQuizPerChoice);
+
+// user progress
+router
+  .route("/progress/user", authenticateUser)
+  .post(createAttempt)
+  .get(getUserAttempts);
+
+// for testing only
+router.route("/progress").get(getAllAttempts);
+router.route("/progress/:id").delete(deleteAttempt);
 
 module.exports = router;
