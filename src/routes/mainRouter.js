@@ -17,7 +17,6 @@ const signupDataValidate = require("../middlewares/signupDataValidate");
 const loginDataValidate = require("../middlewares/loginDataValidate");
 const authenticateUser = require("../middlewares/authenticateUser");
 const {
-favorites
   removeFavoriteQuiz,
   addFavoriteQuiz,
   getUserFavorites,
