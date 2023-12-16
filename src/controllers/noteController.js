@@ -35,11 +35,6 @@ const getNotes = async (req, res) => {
   const { userId } = req.user;
   try {
     const notes = await noteModel.find({ createdBy: userId });
-    //verify is not array is empty and return a message
-    if (notes.length === 0) {
-      throw new Error("You don't have any note for the moment !");
-    }
-
     res.status(200).json({
       success: true,
       notes: notes,
@@ -53,10 +48,11 @@ const getNotes = async (req, res) => {
 };
 //update a note of the user
 const updateNote = async (req, res) => {
-  // const noteId = req.params.noteid;
-  const { noteId } = req.body;
+  const {
+    params: { id: noteId },
+  } = req;
   try {
-    const note = await noteModel.findByIdAndUpdate(noteId, req.body);
+    const note = await noteModel.findByIdAndUpdate({ _id: noteId }, req.body);
     await note.save();
     res.status(200).json({
       success: true,
@@ -70,39 +66,28 @@ const updateNote = async (req, res) => {
   }
 };
 
-//delete a note of the user
-const deleteNote = async (req, res) => {
-  // const noteId = req.params.noteid;
-  const { noteId } = req.body;
+// delete many notes of the user
+const deleteManyNotes = async (req, res) => {
   try {
-    await noteModel.findByIdAndDelete(noteId);
+    const ids = req.query.ids.split(",");
+    await noteModel.deleteMany({
+      _id: { $in: ids },
+    });
     res.status(200).json({
       success: true,
-      message: " Your note has been deleted successfuly",
+      message: "Notes has been deleted",
     });
   } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-//delete all the notes of the user
-const deleteAllNote = async (req, res) => {
-  // const noteId = req.params.noteid;
-  const { userId } = req.user;
-  try {
-    await noteModel.deleteMany({ createdBy: userId });
-    res.status(200).json({
-      success: true,
-      message: " Your notes has been deleted successfuly",
-    });
-  } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       success: false,
       message: error.message,
     });
   }
 };
 
-module.exports = { addNote, getNotes, updateNote, deleteNote, deleteAllNote };
+module.exports = {
+  addNote,
+  getNotes,
+  updateNote,
+  deleteManyNotes,
+};

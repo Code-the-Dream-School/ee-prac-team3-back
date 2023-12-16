@@ -9,8 +9,7 @@ const {
   addNote,
   getNotes,
   updateNote,
-  deleteNote,
-  deleteAllNote,
+  deleteManyNotes,
 } = require("../controllers/noteController");
 const signupDataValidate = require("../middlewares/signupDataValidate");
 const loginDataValidate = require("../middlewares/loginDataValidate");
@@ -26,11 +25,11 @@ router
 router.get("/logout", logOut);
 
 //notes
-
-router.post("/addnote", authenticateUser, addNote);
-router.get("/getnotes", authenticateUser, getNotes);
-router.put("/updatenote", authenticateUser, updateNote);
-router.delete("/deletenote", authenticateUser, deleteNote);
-router.delete("/deleteallnote", authenticateUser, deleteAllNote);
+router.post("/note", authenticateUser, addNote);
+router.put("/note/:id", authenticateUser, updateNote);
+router
+  .route("/notes")
+  .get(authenticateUser, getNotes)
+  .delete(authenticateUser, deleteManyNotes);
 
 module.exports = router;
