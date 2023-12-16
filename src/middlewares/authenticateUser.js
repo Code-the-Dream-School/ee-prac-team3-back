@@ -20,6 +20,7 @@ const authenticateUser = (req, res, next) => {
       firstname: payload.firstname,
       lastname: payload.lastname,
       role: payload.role,
+      favorites: payload.favorites,
       avatarURL: payload.avatarURL,
       accessToken: token,
     };
