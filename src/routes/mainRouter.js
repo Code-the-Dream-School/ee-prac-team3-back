@@ -27,6 +27,12 @@ const {
   getAllAttempts,
   deleteAttempt,
 } = require("../controllers/attemptController");
+const {
+  addNote,
+  getNotes,
+  updateNote,
+  deleteManyNotes,
+} = require("../controllers/noteController");
 
 const router = express.Router();
 
@@ -52,7 +58,6 @@ router
 //question per category
 router.route("/quiz/category").get(authenticateUser, getQuizPerChoice);
 
-
 //Favorites
 router.get("/favorites", authenticateUser, getUserFavorites);
 router.post("/favorites/add", authenticateUser, addFavoriteQuiz);
@@ -67,5 +72,13 @@ router
 // for testing only
 router.route("/progress").get(getAllAttempts);
 router.route("/progress/:id").delete(deleteAttempt);
+
+//notes
+router.post("/note", authenticateUser, addNote);
+router.put("/note/:id", authenticateUser, updateNote);
+router
+  .route("/notes")
+  .get(authenticateUser, getNotes)
+  .delete(authenticateUser, deleteManyNotes);
 
 module.exports = router;
