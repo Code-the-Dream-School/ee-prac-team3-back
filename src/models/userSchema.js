@@ -16,13 +16,7 @@ const userSchema = new Schema({
     minLength: [3, "lastname must be at least 3 char"],
     maxLength: [15, "lastname must be less than 15 char"],
   },
-  username: {
-    type: String,
-    required: [true, "username must be required"],
-    minLength: [3, "username must be at least 3 char"],
-    maxLength: [15, "username must be less than 15 char"],
-    unique: [true, "username must be unique"],
-  },
+
   email: {
     type: String,
     required: [true, "email must be required"],
@@ -32,15 +26,20 @@ const userSchema = new Schema({
     type: String,
     required: [true, "password must be required"],
   },
+  avatarURL: {
+    type: String,
+  },
   role: {
     type: String,
     enum: ["admin", "user"],
     default: "user",
   },
-  isActive: {
-    type: Boolean,
-    default: true,
-  },
+  favorites: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Quiz",
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now(),
@@ -63,10 +62,10 @@ userSchema.methods = {
         id: this._id,
         firstname: this.firstname,
         lastname: this.lastname,
-        username: this.username,
         email: this.email,
         role: this.role,
-        isActive: this.isActive,
+        favorites: this.favorites,
+        avatarURL: this.avatarURL,
       },
       process.env.SECRET,
       { expiresIn: "24h" }

@@ -84,11 +84,11 @@ const logIn = async (req, res) => {
 const getUser = async (req, res) => {
   const { userId } = req.user;
   try {
-    const user = await userModel.findById(userId);
+    const user = await userModel.findById(userId).populate("favorites");
     return res.status(200).json({
       success: true,
       message: "User data got  sucessfully",
-      data: req.user,
+      user: req.user, //user
     });
   } catch (error) {
     return res.status(400).json({
@@ -155,4 +155,112 @@ const logOut = (req, res) => {
     });
   }
 };
-module.exports = { signUp, logIn, getUser, getAdmin, logOut };
+
+/******************************************************
+ * @UPDATEUSER
+ * @route /api/v1/updateuser
+ * @method PUT
+ * @description Update function for update user data
+ * @body name, email,currentPassword,newPassword
+ * @returns User Object
+ ******************************************************/
+
+const updateUser = async (req, res) => {
+  try {
+    const { userId } = req.user; //retrieve user.id from jwtverify()
+    const {
+      firstname,
+      lastname,
+      email,
+      newPassword,
+      currentPassword,
+      avatarURL,
+    } = req.body;
+    let c;
+
+    // compare current password
+    if (newPassword && currentPassword) {
+      const user = await userModel.findById(userId);
+      if (!(await bcrypt.compare(currentPassword, user.password))) {
+        return res.status(400).json({
+          success: "false",
+          message: "Your current password is not correct! Try it again ",
+        });
+      }
+
+      //change password
+      c = await bcrypt.hash(newPassword, 10); //hash the new password
+    }
+
+    const t = await userModel.findByIdAndUpdate(
+      userId,
+
+      {
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: c,
+        avatarURL: avatarURL,
+      },
+      { new: true }
+    );
+    t.save();
+    //update cookies
+    const token = t.jwtToken();
+    const cookiesOptions = {
+      maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true,
+    };
+    res.cookie("token", token, cookiesOptions);
+    return res.status(200).json({
+      success: true,
+      message: "User data updated successfuly",
+      data: t,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message, //"User not found "
+    });
+  }
+};
+
+/******************************************************
+ * @DELETEUSER
+ * @route /api/v1/deleteuser
+ * @method DELETE
+ * @description singUp function for creating new user
+ * @body name, email, password, confirmPassword
+ * @returns User Object
+ ******************************************************/
+
+const deleteUser = async (req, res) => {
+  const { userId } = req.user; //retrieve user.id from jwtverify()
+  try {
+    await userModel.findByIdAndDelete(userId);
+    const cookiesOptions = {
+      expires: new Date(),
+      httpOnly: true,
+    };
+    res.cookie("token", null, cookiesOptions);
+    return res.status(200).json({
+      success: true,
+      message: "User deleted successfuly",
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: "User was already deleted successfuly  ",
+    });
+  }
+};
+
+module.exports = {
+  signUp,
+  logIn,
+  getUser,
+  getAdmin,
+  logOut,
+  updateUser,
+  deleteUser,
+};
