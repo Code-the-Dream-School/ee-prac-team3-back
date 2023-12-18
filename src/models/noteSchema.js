@@ -6,7 +6,6 @@ const noteSchema = new Schema({
     type: String,
     required: [true, "Title is required"],
     minLength: [5, "Title must be at least 5 characters"],
-    maxLength: [50, "Title must be less than 50 characters"],
   },
   note: {
     type: String,
