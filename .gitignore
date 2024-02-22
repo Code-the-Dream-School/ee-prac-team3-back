@@ -8,7 +8,7 @@ node_modules/
 
 # Optional npm cache directory
 .npm
-./.idea
+.idea
 
 # Optional eslint cache
 .eslintcache
