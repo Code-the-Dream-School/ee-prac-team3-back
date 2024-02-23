@@ -1,5 +1,5 @@
 const express = require("express");
-const cors = require("cors");
+//const cors = require("cors");
 const {
   getAllQuiz,
   insertQuiz,
@@ -36,7 +36,7 @@ const {
 } = require("../controllers/noteController");
 
 const router = express.Router();
-router.use(cors());
+//router.use(cors());
 
 //user
 
