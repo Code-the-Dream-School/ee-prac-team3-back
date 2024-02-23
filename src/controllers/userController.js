@@ -45,25 +45,49 @@ const logIn = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await userModel.findOne({ email }).select("+password");
-    if (!email || !(await bcrypt.compare(password, user.password))) {
+
+    if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(400).json({
         success: false,
         message: "Invalid Credentials",
       });
     }
-    //create token
 
-    const token = user.jwtToken();
-    user.password = undefined;
+    // Generate token
+    const token = JWT.sign({
+      id: user._id,
+      email: user.email,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      role: user.role,
+      favorites: user.favorites,
+      avatarURL: user.avatarURL,
+    }, process.env.SECRET, {
+      expiresIn: '24h', // Set token expiration time
+    });
+
+    // Set token in cookie
     const cookiesOptions = {
-      maxAge: 24 * 60 * 60 * 1000,
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
       httpOnly: true,
+      // You might need to set 'secure: true' if you're using HTTPS in production
     };
     res.cookie("token", token, cookiesOptions);
 
     return res.status(200).json({
       success: true,
-      message: "User Successfuly Sign",
+      message: "User Successfully Signed In",
+      data: {
+        user: {
+          id: user._id,
+          email: user.email,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          role: user.role,
+          favorites: user.favorites,
+          avatarURL: user.avatarURL,
+        },
+      },
     });
   } catch (error) {
     return res.status(400).json({
@@ -72,6 +96,7 @@ const logIn = async (req, res) => {
     });
   }
 };
+
 
 /******************************************************
  * @GETUSER
