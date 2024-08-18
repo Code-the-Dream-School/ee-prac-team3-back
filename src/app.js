@@ -16,8 +16,10 @@ const mainRouter = require("./routes/mainRouter.js");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-//const CLIENT_URL = process.env.NODE_ENV === 'production' ? process.env.DEPLOYED_CLIENT_URL : process.env.LOCAL_CLIENT_URL;
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true })); //cross the app
+app.use(cors({
+    origin: process.env.NODE_ENV === 'production' ? process.env.REACT_APP_CLIENT_URL_PROD : process.env.REACT_APP_CLIENT_URL,
+    credentials: true
+}));
 app.use(logger("dev"));
 app.use(express.static("public"));
 app.use(favicon(__dirname + "/public/favicon.ico"));
