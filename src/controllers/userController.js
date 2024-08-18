@@ -72,7 +72,7 @@ const logIn = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'None',
+      sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'lax',
     };
     res.cookie("token", token, cookiesOptions);
 
@@ -151,7 +151,7 @@ const getAdmin = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'None',
+      sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'lax',
     };
     res.cookie("token", token, cookiesOptions);
     return res.status(200).json({
