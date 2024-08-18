@@ -10,6 +10,7 @@ const cookieParser = require("cookie-parser");
 connectToDb();
 
 const mainRouter = require("./routes/mainRouter.js");
+const path = require("path");
 
 // middleware
 
@@ -44,10 +45,22 @@ app.use(function (req, res, next) {
 });
 
 app.use(logger("dev"));
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(__dirname + "/public/favicon.ico"));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // routes
 app.use("/api/v1", mainRouter);
+
+app.get('/', (req, res) => {
+    res.status(200).send('Welcome to the backend service!');
+});
+
+// Catch-all route for undefined routes
+app.use((req, res) => {
+    res.status(404).json({ message: 'Route not found' });
+});
 
 module.exports = app;
