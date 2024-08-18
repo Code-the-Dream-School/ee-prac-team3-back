@@ -19,13 +19,16 @@ app.use(cookieParser());
 
 const allowedOrigins = [
     process.env.CLIENT_URL,
-    process.env.CLIENT_URL_PROD
+    process.env.CLIENT_URL_PROD,
+    'https://*.app-jsquiz.netlify.app'
 ];
 
 console.log("allowedOrigins === ", allowedOrigins);
 
 app.use(cors({
     origin: function (origin, callback) {
+        console.log("Request origin: ", origin);
+
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
@@ -34,6 +37,11 @@ app.use(cors({
     },
     credentials: true
 }));
+
+app.use(function (req, res, next) {
+    console.log('Request:', req.method, req.url);
+    next();
+});
 
 app.use(logger("dev"));
 app.use(express.static("public"));
