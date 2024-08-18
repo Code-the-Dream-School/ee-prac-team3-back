@@ -4,8 +4,8 @@
   "description": "Back-End Repo for Team 3 of Echidina/Emu Practicum",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon src/app.js",
-    "start": "node src/app.js"
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
   },
   "author": "",
   "license": "ISC",

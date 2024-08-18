@@ -39,9 +39,4 @@ app.use(favicon(__dirname + "/public/favicon.ico"));
 // Routes
 app.use("/api/v1", mainRouter);
 
-const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
-
 module.exports = app;
