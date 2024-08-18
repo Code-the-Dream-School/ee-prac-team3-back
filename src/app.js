@@ -17,6 +17,11 @@ app.use(cookieParser());
 
 // CORS setup
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', process.env.CLIENT_URL);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    next();
+});
 
 // Logger setup
 app.use(logger("dev"));
