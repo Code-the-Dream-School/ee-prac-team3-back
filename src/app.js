@@ -28,6 +28,8 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 // Request logger middleware
 app.use((req, res, next) => {
     console.log('Request:', req.method, req.url);
+    console.log('Cookies:', req.cookies);
+    console.log('Headers:', req.headers);
     next();
 });
 

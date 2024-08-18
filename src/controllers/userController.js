@@ -71,7 +71,8 @@ const logIn = async (req, res) => {
     const cookiesOptions = {
       maxAge: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production'
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
     };
     res.cookie("token", token, cookiesOptions);
 
