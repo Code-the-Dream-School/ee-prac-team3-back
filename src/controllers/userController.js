@@ -151,7 +151,7 @@ const getAdmin = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      sameSite: 'None',
     };
     res.cookie("token", token, cookiesOptions);
     return res.status(200).json({
@@ -178,10 +178,12 @@ const getAdmin = async (req, res) => {
 const logOut = (req, res) => {
   try {
     const cookiesOptions = {
-      expires: new Date(),
+      expires: new Date(0),
       httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'None',
     };
-    res.cookie("token", null, cookiesOptions);
+    res.cookie("token", "", cookiesOptions);
     return res.status(200).json({
       success: true,
       message: "Logged Out",
