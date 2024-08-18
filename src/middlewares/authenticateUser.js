@@ -1,14 +1,14 @@
 const JWT = require("jsonwebtoken");
 const authenticateUser = (req, res, next) => {
-  const { token } = req.cookies;
+  const token = req.cookies.token || (req.headers.authorization && req.headers.authorization.split(' ')[1]);
 
-  // Verify if token is present or not
   if (!token) {
-    return res.status(403).json({
+    return res.status(401).json({
       success: false,
-      message: "Not Authorized",
+      message: "No token provided, authentication required",
     });
   }
+
   try {
     const payload = JWT.verify(token, process.env.SECRET);
 
@@ -26,9 +26,10 @@ const authenticateUser = (req, res, next) => {
 
     next();
   } catch (error) {
-    return res.status(400).json({
+    console.error('Authentication error:', error.message);
+    return res.status(401).json({
       success: false,
-      message: error.message,
+      message: "Invalid or expired token",
     });
   }
 };
