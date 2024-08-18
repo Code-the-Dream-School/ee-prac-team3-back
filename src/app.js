@@ -16,14 +16,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // CORS setup
-const allowedOrigins = [
-    process.env.CLIENT_URL,
-    process.env.CLIENT_URL_TEST
-].filter(Boolean); // Filter out any undefined values
+const allowedOrigin = process.env.CLIENT_URL;
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
+        if (!origin || origin === allowedOrigin) {
             console.log('Origin allowed:', origin);
             callback(null, true);
         } else {
@@ -50,8 +47,9 @@ app.use((req, res, next) => {
 // Routes
 app.use("/api/v1", require("./routes/mainRouter.js"));
 
-app.get('/', (req, res) => {
-    res.status(200).send('Welcome to the backend service!');
+// Serve the SPA
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Catch-all route for undefined routes
@@ -59,7 +57,7 @@ app.use((req, res) => {
     res.status(404).json({ message: 'Route not found' });
 });
 
-// Error handling middleware (optional but recommended)
+// Error handling middleware
 app.use((err, req, res, next) => {
     console.error('Server error:', err.message);
     res.status(500).json({ message: 'Internal server error' });
