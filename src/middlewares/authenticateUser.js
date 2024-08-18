@@ -1,10 +1,7 @@
 const JWT = require("jsonwebtoken");
 const authenticateUser = (req, res, next) => {
-  console.log('Cookies:', req.cookies);
-  console.log('Headers:', req.headers);
-
-  //const { token } = req.cookies;
-  const token = req.headers['authorization'];
+  const { token } = req.cookies;
+  console.log("token ==== ", token)
 
   if (!token) {
     return res.status(401).json({
@@ -15,7 +12,6 @@ const authenticateUser = (req, res, next) => {
 
   try {
     const payload = JWT.verify(token, process.env.SECRET);
-    console.log("payload === ", payload)
 
     // Attach the user data to the request object for further processing
     req.user = {
