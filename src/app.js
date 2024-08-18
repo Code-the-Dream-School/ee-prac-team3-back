@@ -5,12 +5,12 @@ const connectToDb = require("./db/db");
 const favicon = require("express-favicon");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 //connection to the database
 connectToDb();
 
 const mainRouter = require("./routes/mainRouter.js");
-const path = require("path");
 
 // middleware
 
@@ -24,13 +24,10 @@ const allowedOrigins = [
     'https://*.app-jsquiz.netlify.app'
 ];
 
-console.log("allowedOrigins === ", allowedOrigins);
-
 app.use(cors({
     origin: function (origin, callback) {
-        console.log("Request origin: ", origin);
-
         if (!origin || allowedOrigins.includes(origin)) {
+            console.log("allowedOrigins.includes(origin: ", allowedOrigins.includes(origin))
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
@@ -47,9 +44,6 @@ app.use(function (req, res, next) {
 app.use(logger("dev"));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(__dirname + "/public/favicon.ico"));
-app.get('*', (req, res) => {
-    res.sendFile(path.join('public', 'index.html'));
-});
 
 // routes
 app.use("/api/v1", mainRouter);
