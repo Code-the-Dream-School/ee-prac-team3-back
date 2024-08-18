@@ -16,13 +16,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// Configure CORS based on environment
-const allowedOrigin = process.env.NODE_ENV === 'production'
-    ? process.env.REACT_APP_CLIENT_URL_PROD
-    : process.env.REACT_APP_CLIENT_URL;
+const allowedOrigins = [
+    'http://localhost:3000',        // Local development URL
+    'https://app-jsquiz.netlify.app' // Production URL
+];
 
 app.use(cors({
-    origin: allowedOrigin,
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }));
 
