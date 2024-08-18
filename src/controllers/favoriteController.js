@@ -26,27 +26,21 @@ const addFavoriteQuiz = async (req, res) => {
 
     await user.save();
 
-    //update cookies
-    const token = user.jwtToken();
-    const cookiesOptions = {
-      maxAge: 24 * 60 * 60 * 1000,
-      httpOnly: true,
-    };
-    res.cookie("token", token, cookiesOptions);
-
     res.status(200).json({
       success: true,
-      message: "Quiz added from favorites successfully",
+      message: "Quiz added to favorites successfully",
+      favorites: user.favorites,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
 /******************************************************************************
  * @getUserFavoriteQuiz
  * @route /api/v1/favorites
  * @method GET
- * @description display favorites quizz from the user
+ * @description display favorites quizzes from the user
  * @body
  * @returns favorites array
  *******************************************************************************/
@@ -61,12 +55,12 @@ const getUserFavorites = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Return favorite list to the user.
     res.json({ favorites: user.favorites });
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: error.message });
   }
 };
+
 /*************************************************************************************
  * @removeFavoriteQuiz
  * @route /api/v1/favorites/remove
@@ -92,17 +86,10 @@ const removeFavoriteQuiz = async (req, res) => {
 
     await user.save();
 
-    //update cookies
-    const token = user.jwtToken();
-    const cookiesOptions = {
-      maxAge: 24 * 60 * 60 * 1000,
-      httpOnly: true,
-    };
-    res.cookie("token", token, cookiesOptions);
-
     res.status(200).json({
       success: true,
       message: "Quiz removed from favorites successfully",
+      favorites: user.favorites,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

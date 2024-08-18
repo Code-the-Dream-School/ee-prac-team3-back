@@ -36,12 +36,11 @@ const getUserAttempts = async (req, res) => {
   try {
     const user = new ObjectId(`${req.query.userId}`);
     const maxAttempts = await maxScoreAttempts(user);
-    console.log("maxScoreattempts", maxScoreAttempts);
-    console.log("maxAttempts", maxAttempts);
+
     const currentAttempts = await latestScoreAttempts(user);
-    console.log("currentAttempts", currentAttempts);
+
     const mergeResult = maxAttempts.map((attempt) => {
-      console.log("attempt", attempt);
+
       let matchedAttempt = currentAttempts.find((item) =>
         // equals for comparing equality of objects
         item.quiz.equals(attempt.quiz)
