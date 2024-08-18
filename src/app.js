@@ -16,8 +16,22 @@ const mainRouter = require("./routes/mainRouter.js");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+const allowedOrigins = [
+    process.env.CLIENT_URL,
+    process.env.CLIENT_URL_PROD
+];
+
+console.log("allowedOrigins === ", allowedOrigins);
+
 app.use(cors({
-    origin: 'https://app-jsquiz.netlify.app',
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }));
 

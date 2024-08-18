@@ -1,6 +1,6 @@
 const JWT = require("jsonwebtoken");
 const authenticateUser = (req, res, next) => {
-  const { token } = req.cookies;
+  const token = req.cookies.token || (req.headers.authorization && req.headers.authorization.split(' ')[1]);
 
   if (!token) {
     return res.status(401).json({
@@ -26,7 +26,7 @@ const authenticateUser = (req, res, next) => {
 
     next();
   } catch (error) {
-    console.error('Authentication error:', error.message); // Log the error for debugging
+    console.error('Authentication error:', error.message);
     return res.status(401).json({
       success: false,
       message: "Invalid or expired token",
