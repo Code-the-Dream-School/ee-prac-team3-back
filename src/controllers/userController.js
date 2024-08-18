@@ -124,7 +124,7 @@ const getUser = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "User data got  sucessfully",
-      user
+      user: req.user,
     });
   } catch (error) {
     return res.status(400).json({
@@ -148,8 +148,10 @@ const getAdmin = async (req, res) => {
     //update cookies
     const token = user.jwtToken();
     const cookiesOptions = {
-      maxAge: 24 * 60 * 60 * 1000,
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
       httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
     };
     res.cookie("token", token, cookiesOptions);
     return res.status(200).json({
