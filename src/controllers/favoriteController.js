@@ -48,6 +48,12 @@ const addFavoriteQuiz = async (req, res) => {
 const getUserFavorites = async (req, res) => {
   const { userId } = req.user;
 
+  console.log('User ID:', userId);
+
+  if (!userId) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
   try {
     const user = await userModel.findById(userId);
 
