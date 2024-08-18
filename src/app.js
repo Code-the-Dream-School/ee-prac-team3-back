@@ -1,34 +1,24 @@
 const express = require("express");
-const cors = require("cors");
 const app = express();
+const cors = require("cors");
 const connectToDb = require("./db/db");
 const favicon = require("express-favicon");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 
-// Connect to the database
+//connection to the database
 connectToDb();
 
 const mainRouter = require("./routes/mainRouter.js");
 
-// Middleware setup
+// middleware
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-const allowedOrigins = [
-    'http://localhost:3000',        // Local development URL
-    'https://app-jsquiz.netlify.app' // Production URL
-];
-
+//const CLIENT_URL = process.env.NODE_ENV === 'production' ? process.env.DEPLOYED_CLIENT_URL : process.env.LOCAL_CLIENT_URL;
 app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: process.env.NODE_ENV === 'production' ? process.env.CLIENT_URL_PROD : process.env.CLIENT_URL,
     credentials: true
 }));
 
@@ -36,7 +26,7 @@ app.use(logger("dev"));
 app.use(express.static("public"));
 app.use(favicon(__dirname + "/public/favicon.ico"));
 
-// Routes
+// routes
 app.use("/api/v1", mainRouter);
 
 module.exports = app;

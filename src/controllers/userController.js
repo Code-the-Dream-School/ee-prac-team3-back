@@ -109,24 +109,15 @@ const logIn = async (req, res) => {
  ******************************************************/
 
 const getUser = async (req, res) => {
+  const { userId } = req.user;
   try {
-    const userId = req.user.id;
     const user = await userModel.findById(userId).populate("favorites");
-
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "User not found.",
-      });
-    }
-
     return res.status(200).json({
       success: true,
-      message: "User data got successfully",
-      user,
+      message: "User data got  sucessfully",
+      user: req.user, //user
     });
   } catch (error) {
-    console.error("Get user error:", error);
     return res.status(400).json({
       success: false,
       message: error.message,
